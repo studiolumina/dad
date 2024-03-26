@@ -1,0 +1,91 @@
+---
+import { createVars } from '../lib/createVars';
+import { brand } from '../../public/config.json';
+import { check } from '@astrojs/check';
+interface Props {
+    floating?: boolean;
+    center?: boolean;
+    auth?: boolean;
+}
+
+const { floating, center, auth } = Astro.props;
+const navItems:Record<string, string>[]=[
+
+    { text: 'Item 1' },
+    { text: 'Item 2' },
+    { text: 'Item 3' },
+    {
+        href: '/',
+        text: 'Item 4'
+    }
+]
+
+const shadowClass = 'shadow';
+
+const bsColor = !floating ? 'var(--bs-gray-800)' : 'var(--bs-gray-000)';
+const bsHoverColor = !floating ? 'var(--bs-primary-500)' : 'var(--bs-primary-300)';
+
+const navClasses = ():string[] => {
+    const classes = ['navbar navbar-expand-lg'];
+    if (!center && floating) {
+        classes.push('w-75', 'mx-auto');
+    }
+    if (center && floating) {
+        classes.push('w-50','mx-auto');
+    }
+    if (!floating) {
+        classes.push(shadowClass)
+    }
+    return classes;
+}
+
+const containerClasses = () => {
+    const classes = ['container'];
+    if (floating) {
+        classes.push('text-bg-dark p-3 rounded-3', shadowClass);
+    }
+    if (center) classes.push('vstack');
+
+    return classes;
+}
+
+const cssVars = createVars({
+    brandColor: bsColor,
+    color: bsColor,
+    brandHoverColor: bsHoverColor,
+    hoverColor: bsHoverColor,
+    brandFontSize: '4ch',
+    brandPaddingY: 0,
+}, 'bs-navbar')
+console.log(cssVars);
+/*
+const cssVars = {
+    'bs-navbar-brand-color': bsColor,
+    'bs-navbar-color': bsColor,
+    'bs-navbar-brand-font-size': '4ch',
+    'bs-navbar-brand-padding-y': '0ch',
+    'bs-navbar-brand-hover-color': bsHoverColor,
+    'bs-navbar-hover-color': bsHoverColor
+}
+*/
+
+---
+<nav class:list={navClasses()}>
+    <div class:list={containerClasses()}>
+        <a href="/" class="navbar-brand ps-3 pe-2">
+            {brand.logo ? <img src={brand.logo} alt={brand.text} /> : brand.text}
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                {navItems.map(item => <li class="nav-item">
+                    {item?.href ? <a class="nav-link" href={item.href}>{item?.text}</a> : <span class="nav-link">{item.text}</span>}
+                </li>)}
+            </ul>
+        </div>
+    </div>
+</nav>
+<style define:vars={cssVars}>
+.navbar-brand {
+    font-weight: 900;
+}
+</style>
