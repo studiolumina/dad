@@ -23,6 +23,21 @@ colors['bs-dark'] = colors['bs-gray-900'];
 colors['bs-dark-hsl'] = colors['bs-gray-900-hsl'];
 colors['bs-dark-hex'] = colors['bs-gray-900-hex'];
 colors['bs-dark-rgb'] = colors['bs-gray-900-rgb'];
+
+const globalNav = [
+	{
+		href: '/',
+		text: 'Home'
+	},
+	{
+		href: '/solutions',
+		text: 'Solutions'
+	},
+	{
+		href: '/components',
+		text: 'Components'
+	}
+]
 ---
 
 <!doctype html>
@@ -37,7 +52,7 @@ colors['bs-dark-rgb'] = colors['bs-gray-900-rgb'];
 		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" />
 	</head>
 	<body>
-		<Navigation />
+		<Navigation navItems={globalNav} />
 		<slot />
 	</body>
 </html>

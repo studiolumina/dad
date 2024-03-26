@@ -1,24 +1,28 @@
 ---
 import { createVars } from '../lib/createVars';
 import { brand } from '../../public/config.json';
-import { check } from '@astrojs/check';
+
 interface Props {
     floating?: boolean;
     center?: boolean;
     auth?: boolean;
+    navItems?: Record<string, string>[];
 }
 
-const { floating, center, auth } = Astro.props;
-const navItems:Record<string, string>[]=[
+const { floating, center } = Astro.props;
+let navItems = Astro.props.navItems;
+if (!navItems) {
+    navItems = [
 
-    { text: 'Item 1' },
-    { text: 'Item 2' },
-    { text: 'Item 3' },
-    {
-        href: '/',
-        text: 'Item 4'
-    }
-]
+        { text: 'Item 1' },
+        { text: 'Item 2' },
+        { text: 'Item 3' },
+        {
+            href: '/',
+            text: 'Item 4'
+        }
+    ]
+}
 
 const shadowClass = 'shadow';
 
@@ -57,17 +61,6 @@ const cssVars = createVars({
     brandFontSize: '4ch',
     brandPaddingY: 0,
 }, 'bs-navbar')
-console.log(cssVars);
-/*
-const cssVars = {
-    'bs-navbar-brand-color': bsColor,
-    'bs-navbar-color': bsColor,
-    'bs-navbar-brand-font-size': '4ch',
-    'bs-navbar-brand-padding-y': '0ch',
-    'bs-navbar-brand-hover-color': bsHoverColor,
-    'bs-navbar-hover-color': bsHoverColor
-}
-*/
 
 ---
 <nav class:list={navClasses()}>
