@@ -1,4 +1,15 @@
 import { defineConfig } from 'astro/config';
+import critters from "astro-critters";
+/*
+const bootstrap = () => {
+  return {
+    name: 'bootstrap',
+    hooks: {}
+  };
+};
+*/
 
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  integrations: [critters()]
+});

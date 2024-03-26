@@ -10,8 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.5.9",
     "@astrojs/check": "^0.5.10",
+    "astro": "^4.5.9",
+    "astro-critters": "^2.1.6",
     "typescript": "^5.4.3"
+  },
+  "devDependencies": {
+    "astro-google-fonts-optimizer": "^0.2.2",
+    "bootstrap": "^5.3.3",
+    "colorjs.io": "^0.5.0",
+    "sass": "^1.72.0"
   }
 }
