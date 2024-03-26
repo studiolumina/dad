@@ -2,5 +2,7 @@
     "brand": {
         "text":"dad.",
         "logo":""
-    }
+    },
+    "site":"https://studiolumina.github.io",
+    "base": "dad"
 }

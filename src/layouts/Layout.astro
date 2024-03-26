@@ -3,6 +3,10 @@ import '../styles/index.scss';
 import { createPalette } from '../lib/colors';
 import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
 import Navigation from '../components/Navigation.astro';
+import * as config from '../../public/config.json';
+
+const base = config?.base ?? '';
+
 interface Props {
 	title: string;
 }
@@ -37,7 +41,10 @@ const globalNav = [
 		href: '/components',
 		text: 'Components'
 	}
-]
+].map((navItem) => {
+	navItem.href = base + navItem.href;
+	return navItem;
+})
 ---
 
 <!doctype html>
