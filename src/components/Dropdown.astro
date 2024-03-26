@@ -1,0 +1,19 @@
+---
+interface Props {
+    items: unknown[]
+    title: string
+}
+
+const { items, title } = Astro.props;
+/**
+ * Just build a dropdown compatible item
+ */
+---
+<div class="dropdown">
+    <button class="btn btn-reset" type="button">{title}</button>
+    <ul class="dropdown-menu">
+        {items.map((item) => {
+            return <li>{item}</li>
+        })}
+    </ul>
+</div>
