@@ -1,0 +1,14 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+$spacer: 0.75rem;
+$enable-shadow: true;
+$enable-gradients: true;
+$enable-negative-margins: true;
+
+$container-max-widths: (
+    sm: 500px,
+    md: 700px,
+    lg: 940px,
+    xl: 1120px,
+    xxl: 1300px
+);
