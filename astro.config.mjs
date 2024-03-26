@@ -11,5 +11,7 @@ const bootstrap = () => {
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [critters()]
+  integrations: [critters()],
+  site: 'https://studiolumina.github.io',
+  base: 'dad'
 });
