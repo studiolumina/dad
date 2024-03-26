@@ -1,9 +1,28 @@
 ---
+import '../styles/index.scss';
+import { createPalette } from '../lib/colors';
+import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
+import Navigation from '../components/Navigation.astro';
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
+
+const primaryHexes = 'f9ecf2,eec5d7,e29fbd,d679a3,d16595,c53f7b,9e3262,76264a,4f1931,270d19';
+const secondaryHexes = 'f1f9ff,d6ecfe,bbdffd,a0d2fc,85c5fb,6bace1,5386af,3c607d,24394b,0c1319';
+const grayHexes = 'ffffff,e8e8e8,d1d1d1,bababb,a3a3a4,747476,2f2f32,18181b,131316,000000';
+
+const colors = {
+	...createPalette(primaryHexes, 'bs-primary'),
+	...createPalette(secondaryHexes, 'bs-secondary'),
+	...createPalette(grayHexes, 'bs-gray')
+}
+
+colors['bs-dark'] = colors['bs-gray-900'];
+colors['bs-dark-hsl'] = colors['bs-gray-900-hsl'];
+colors['bs-dark-hex'] = colors['bs-gray-900-hex'];
+colors['bs-dark-rgb'] = colors['bs-gray-900-rgb'];
 ---
 
 <!doctype html>
@@ -15,37 +34,58 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" />
 	</head>
 	<body>
+		<Navigation />
 		<slot />
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+<style is:global define:vars={{ ...colors }}>
+	html,
+	body {
+		font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		height: 100%;
+		color: var(--bs-gray-800);
 	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
+	body {
+		display: flex;
+		min-height: 100dvh;
+		flex-flow: column;
 	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+	main {
+		flex-grow: 1;
+	}
+	h1 {
+		font-weight: 900;
+	}
+	h2 {
+		font-weight: 600;
+	}
+	:is(h1,h2,h3,h4,h5,h6) > i {
+		font-weight: 900;
+	}
+	.visually-hidden {
+		width: 1px!important;
+		height: 1px!important;
+		padding: 0!important;
+		margin: -1px!important;
+		overflow: hidden!important;
+		clip: rect(0,0,0,0)!important;
+		white-space: nowrap!important;
+		border: 0!important;
+	}
+	:is(ul, ol) {
+		padding-left: unset;
+		list-style-position: inside;
+		display: grid;
+		grid-gap: 0.5em;
+	}
+	:is(ul, ol)[role="list"] {
+		list-style-type: none;
+	}
+	img {
+		max-width: 100%;
+		height: auto;
 	}
 </style>
