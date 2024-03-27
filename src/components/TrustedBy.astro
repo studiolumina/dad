@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageProps, Sizes } from '../types'
+import Badge from './Badge.astro';
+interface Props {
+    images: ImageProps[];
+    size?: Sizes;
+}
+
+const { size = 'sm' } = Astro.props;
+
+const maxSize = {
+    sm: 75,
+    md: 100,
+    lg: 120
+}[size];
+---
+<section class={"trusted-by trusted-by-" + (size)}>
+    <div class="container">
+        <div class="row position-relative justify-content-center">
+            <div class="col-auto trusted-by-badge">
+                <Badge size='lg' style='info'>Trusted by the best</Badge>
+            </div>
+            <span></span>
+            <div class="col-lg-6 text-bg-dark trusted-by-container">
+                <ul class="hstack pt-5 pb-4 px-4 justify-content-around">
+                    {Astro.props.images.map(({ src, alt = '' }) => <li>
+                        <Image src={src} width={maxSize} height={maxSize} alt={alt}/>    
+                    </li>)}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .trusted-by-badge {
+        position:absolute;
+        top: -10%;
+    }
+    .trusted-by li {
+        max-width: max-content;
+    }
+    .trusted-by-container {
+        @media (min-width: 576px) {
+            border-radius: 1.25rem;
+        }
+    }
+    .trusted-by img {
+        filter: grayscale(1);
+        object-fit: contain;
+        max-height: 100px;
+    }
+
+    .trusted-by-sm img {
+        max-height: 75px;
+    }
+    .trusted-by-lg img {
+        max-height: 120px;
+    }
+</style>
