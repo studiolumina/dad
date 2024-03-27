@@ -1,0 +1,54 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props {
+    initial?: string
+}
+---
+<div class="dark-mode-toggle">
+    <button class="btn btn-reset">
+        <Icon name="pepicons-pencil:moon" class='show-on-dark' />
+        <Icon name="pepicons-pencil:sun" class="show-on-light" />
+    </button>
+</div>
+<script>
+    const d = document.documentElement.dataset;
+    document.addEventListener('click', (e) => {
+        if (!(e.target as HTMLElement).closest('.dark-mode-toggle > button')) return
+
+        d.bsTheme = 'light' === d.bsTheme ? 'dark' : 'light';
+        localStorage.setItem('is-dark', d.bsTheme);
+    })
+</script>
+<style>
+    .btn {
+        --bs-btn-hover-color: white;
+        --bs-btn-hover-bg: var(--bs-black);
+        --bs-btn-color: var(--bs-black);
+        --bs-btn-bg: white;
+        --bs-btn-border-radius: 100000000em;
+        display: grid;
+        place-content: center;
+        aspect-ratio: 1;
+        font-size: 1.5rem;
+    }
+    body:where(.is-dark) .btn {
+        --bs-btn-hover-bg: white;
+        --bs-btn-hover-color: var(--bs-black);
+        --bs-btn-bg: var(--bs-black);
+        --bs-btn-color: white;
+    }
+    .btn > * {
+        grid-column: 1;
+        grid-row: 1;
+        color: inherit;
+    }
+    body:where(.is-dark) .show-on-light,
+    body:where(:not(.is-dark)) .show-on-dark {
+        display: none;
+    }
+
+    body:where(.is-dark) .show-on-dark,
+    body:where(:not(.is-dark)) .show-on-light {
+        display: initial;
+    }
+</style>
