@@ -1,0 +1,34 @@
+---
+import type { Style, Sizes } from '../types';
+
+interface Props {
+    style?: Style;
+    size?: Sizes;
+    class?: string;
+}
+
+const { style = 'light', size = 'sm', class: className = '' } = Astro.props;
+
+
+---
+<div class:list={["badge", 'text-bg-'+style, 'badge-'+size, className]}>
+    <slot></slot>
+</div>
+<style>
+    .badge {
+        --bs-badge-border-radius: var(--bs-border-radius-pill);
+        --base: 0.75;
+        --bs-badge-font-size: calc(var(--base) * 1em);
+        --bs-badge-padding-y: calc(var(--base) * 0.6em);
+        --bs-badge-padding-x: calc(var(--base) * 1.1em);
+    }
+    .badge-sm {
+        --base: 0.6;
+    }
+
+    .badge-md {}
+    
+    .badge-lg {
+        --base: 0.9;
+    }
+</style>
