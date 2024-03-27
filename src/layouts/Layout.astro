@@ -1,6 +1,7 @@
 ---
 import '../styles/index.scss';
 import { createPalette } from '../lib/colors';
+import Footer from '../components/Footer.astro';
 import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
 import Navigation from '../components/Navigation.astro';
 import * as config from '../../public/config.json';
@@ -27,7 +28,7 @@ colors['bs-dark'] = colors['bs-gray-900'];
 colors['bs-dark-hsl'] = colors['bs-gray-900-hsl'];
 colors['bs-dark-hex'] = colors['bs-gray-900-hex'];
 colors['bs-dark-rgb'] = colors['bs-gray-900-rgb'];
-
+colors['bs-black'] = colors['bs-gray-900'];
 const globalNav = [
 	{
 		href: '/',
@@ -42,7 +43,7 @@ const globalNav = [
 		text: 'Components'
 	}
 ].map((navItem) => {
-	navItem.href = base + navItem.href;
+	navItem.href = (import.meta.env.DEV ? '' : base) + navItem.href;
 	return navItem;
 })
 ---
@@ -57,57 +58,19 @@ const globalNav = [
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" />
+		<script is:inline>
+			
+			const theme = localStorage.getItem('is-dark') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+			console.log(localStorage.getItem('is-dark'), theme);
+			document.documentElement.dataset.bsTheme = theme;
+			localStorage.setItem('is-dark', theme);
+		</script>
 	</head>
 	<body>
 		<Navigation navItems={globalNav} />
-		<slot />
+		<main>
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>
-<style is:global define:vars={{ ...colors }}>
-	html,
-	body {
-		font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-		height: 100%;
-		color: var(--bs-gray-800);
-	}
-	body {
-		display: flex;
-		min-height: 100dvh;
-		flex-flow: column;
-	}
-	main {
-		flex-grow: 1;
-	}
-	h1 {
-		font-weight: 900;
-	}
-	h2 {
-		font-weight: 600;
-	}
-	:is(h1,h2,h3,h4,h5,h6) > i {
-		font-weight: 900;
-	}
-	.visually-hidden {
-		width: 1px!important;
-		height: 1px!important;
-		padding: 0!important;
-		margin: -1px!important;
-		overflow: hidden!important;
-		clip: rect(0,0,0,0)!important;
-		white-space: nowrap!important;
-		border: 0!important;
-	}
-	:is(ul, ol) {
-		padding-left: unset;
-		list-style-position: inside;
-		display: grid;
-		grid-gap: 0.5em;
-	}
-	:is(ul, ol)[role="list"] {
-		list-style-type: none;
-	}
-	img {
-		max-width: 100%;
-		height: auto;
-	}
-</style>
