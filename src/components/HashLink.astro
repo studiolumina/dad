@@ -1,0 +1,17 @@
+---
+interface Props {
+    id: string;
+    level?: number|string;
+}
+
+let { id, level = 2 } = Astro.props;
+const link = '#' + id;
+---
+
+<div>
+    {level == 2 && <h2 id={id}><slot></slot> <a href={link}>#</a></h2>}
+    {level == 3 && <h3 id={id}><slot></slot> <a href={link}>#</a></h3>}
+    {level == 4 && <h4 id={id}><slot></slot> <a href={link}>#</a></h4>}
+    {level == 5 && <h5 id={id}><slot></slot> <a href={link}>#</a></h5>}
+    {level == 6 && <h6 id={id}><slot></slot> <a href={link}>#</a></h6>}
+</div>
