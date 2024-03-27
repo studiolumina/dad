@@ -1,0 +1,87 @@
+---
+import { getId } from '../lib/component';
+import { parse, render } from 'ultrahtml';
+interface Props {
+    floating?: boolean;
+    side?: 'left' | 'right';
+}
+const { floating, side } = Astro.props;
+
+const id=getId('bentoBoxTabs');
+let { children: boxes }= parse(await Astro.slots.render('boxes'));
+boxes = boxes.filter((item: { type: number }) => item.type === 1);
+
+const triggers:any[] = [];
+
+boxes = boxes.map((box: { attributes: { id: string, class: string, 'data-bs-parent': string } }, i: number) => {
+    triggers.push({
+        id: box.attributes.id,
+    })
+    box.attributes.class += ' collapse';
+    i === 0 && (box.attributes.class += ' show');
+    box.attributes['data-bs-parent'] = '#'+id;
+    return box;
+});
+---
+<bento-tabs class="bento-tabs" id={id}>
+    {floating ? <Fragment>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto hstack trigger-wrapper">
+                    {triggers.map((trigger, i) => <button class:list={["btn trigger", i === 0 ? 'active' : '']} aria-expanded="false" aria-controls={trigger.id}>Trigger</button>)}
+                </div>
+            </div>
+        </div> 
+        <div class="container">
+            <div class="row" set:html={boxes.map(render)}>
+            </div>
+        </div>
+    </Fragment>: <div class="container">
+        <div class="row">
+            <div class:list={["col-md-7 boxes", side === 'left' ? '' : 'order-1']} set:html={boxes.map(render)}>
+            </div>
+            <div class="col-md-5">
+                {triggers.map((trigger, i) => <button class:list={["btn trigger", i === 0 ? 'active' : '']} aria-expanded="false" aria-controls={trigger.id}>Trigger</button>)}
+            </div>
+        </div>
+    </div>}
+</bento-tabs>
+<script>
+    const io = new IntersectionObserver(([{ isIntersecting }]) => {
+        if (isIntersecting) {
+            // @ts-ignore
+            import('./BentoBoxTabs');
+            console.log('importing');
+            io.disconnect();
+        }
+    })
+    document.querySelectorAll('bento-tabs').forEach(bento => io.observe(bento));
+</script>
+<style>
+    .trigger {
+        --bs-btn-bg: white;
+        --bs-btn-border-color: transparent;
+        --bs-btn-color: var(--bs-gray-900);
+        --bs-btn-hover-color: white;
+        --bs-btn-hover-bg: var(--bs-gray-900);
+        --bs-btn-box-shadow: unset;
+        --bs-btn-hover-border-color: transparent;
+        --bs-btn-padding-x: calc(var(--spacer) * 5);
+        --bs-btn-active-bg: var(--bs-pink-100);
+    }
+    .trigger.active {
+        background-color: var(--bs-btn-active-bg);
+        color: var(--bs-btn-active-color);
+        border-color: var(--bs-btn-active-border-color);
+    }
+    .trigger-wrapper {
+        --outer: 10px;
+        --spacer: 1rem;
+        --inner: calc(var(--outer) - var(--spacer));
+        padding: calc(var(--spacer) / 2);
+        gap: calc(var(--spacer) * 1.5);
+        --bs-btn-border-radius: var(--inner);
+        border-radius: var(--outer);
+        background-color: var(--bs-gray-900);
+    }
+</style>
