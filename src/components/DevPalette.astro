@@ -1,0 +1,82 @@
+---
+interface Props {
+    color:string;
+    invert?: number;
+}
+
+const { color, invert: $i = 6 } = Astro.props;
+
+---
+<section class="dev-palette">
+    <h3>{color}</h3>
+    <ul>
+        {Array.from({ length: 9 }).map((_n, i) => {
+            return <li class={`bg-${color}-${i+1}00`}>
+                <button class={$i >= i ? 'text-black' : 'text-white'}>
+                    <span class="text">{i+1}00</span>
+                    <span class="notice">Copied</span>
+                </button>
+                
+            </li>
+        })}
+    </ul>
+</section>
+<style>
+    ul {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    li {
+        aspect-ratio: 1;
+        list-style-type: none;
+        display: grid;
+        border-radius: 0.3em;
+    }
+    button {
+        border-radius: inherit;
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        border: unset;
+        display: grid;
+        place-content: center;
+        > * {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .notice {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.15s ease;
+            transition-property: opacity, transform;
+        }
+
+        &.active .notice {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .text {
+            transition: opacity 0.1s ease;
+        }
+
+        &.active .text {
+            opacity: 0;
+        }
+    }
+</style>
+<script>
+    document.addEventListener('click', async (e) => {
+        const btn = (e.target as HTMLElement).closest('.dev-palette button');
+        if (!btn) return;
+        const { backgroundColor } = getComputedStyle(btn);
+
+        try {
+            await navigator.clipboard.writeText(backgroundColor);
+            btn.classList.add('active');
+            setTimeout(() => btn.classList.remove('active'), 750)
+        } catch(e) {
+            console.error(e);
+        }
+    })
+</script>
