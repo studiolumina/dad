@@ -1,0 +1,28 @@
+---
+import Avatar from "./Avatar.astro";
+
+interface Props {
+    avatar?: string;
+    username?: string;
+    size?: 'sm'|'md'|'lg'
+}
+const { username = 'Username', avatar, size = 'sm' } = Astro.props
+/**
+ * Needs to be thought out more,
+ * missing some parts and pieces
+ */
+---
+<div class="card">
+    <div class="card-body">
+        <div class="hstack column-gap-3 align-items-end">
+            <Avatar image={avatar} alt={username} size={size} />
+            <p class="h4">{username}</p>
+        </div>
+    </div>
+</div>
+<style>
+    .card {
+        --avatar-border-radius: var(--bs-border-radius-pill);
+        --bs-card-border-color: transparent;
+    }
+</style>
