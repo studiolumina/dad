@@ -1,0 +1,27 @@
+---
+import HashLink from "../../components/HashLink.astro";
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/Navigation.astro";
+---
+<Layout title="Navigation">
+    <div class="container">
+        <div class="vstack row-gap-3">
+            <a href="../components">Back</a>
+            <HashLink id="navigation">Navigation</HashLink>
+            <hr class="mb-5">
+        </div>
+    </div>
+    <Navigation />
+    <div class="container">
+        <h3 class="h6 mb-0 mt-3">Centered</h3>
+    </div>
+    <Navigation center={true} />
+    <div class="container">
+        <h3 class="h6 mb-0 mt-3">Floating</h3>
+    </div>
+    <Navigation floating={true} />
+    <div class="container">
+        <h3 class="h6 mb-0 mt-3">Centered and Floating</h3>
+    </div>
+    <Navigation floating={true} center={true} />
+</Layout>

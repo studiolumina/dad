@@ -1,0 +1,92 @@
+---
+import HashLink from "../../components/HashLink.astro";
+import Layout from "../../layouts/Layout.astro";
+
+
+---
+<Layout title="Typography">
+    <div class="container">
+        <HashLink id="headings">Headings</HashLink>
+        <hr class="mb-5">
+        <div class="row">
+            <div class="vstack row-gap-3 mb-4">
+                <p class="h1">Heading 1</p>
+                <p class="h2">Heading 2</p>
+                <p class="h3">Heading 3</p>
+                <p class="h4">Heading 4</p>
+                <p class="h5">Heading 5</p>
+                <p class="h6">Heading 6</p>
+            </div>
+            <div></div>
+            <div class="vstack row-gap-3 mb-4">
+                <p class="h1">Heading 1 <small class="text-body-secondary">With faded secondary text</small></p>
+            </div>
+            <div></div>
+            <div class="vstack row-gap-3 mb-4">
+                <p class="display-1">Display 1</p>
+                <p class="display-2">Display 2</p>
+                <p class="display-3">Display 3</p>
+                <p class="display-4">Display 4</p>
+            </div>
+            <div></div>
+            <div class="vstack row-gap-3">
+                <HashLink id="2">Hash Link 2</HashLink>
+                <HashLink id="3" level={3}>Hash Link 3</HashLink>
+                <HashLink id="4" level={4}>Hash Link 4</HashLink>
+                <HashLink id="5" level={5}>Hash Link 5</HashLink>
+                <HashLink id="6" level={6}>Hash Link 6</HashLink>
+            </div>
+        </div>
+    </div>
+    <div class="container text-bg-dark">
+        <div class="row">
+            <div class="vstack row-gap-3 mb-4">
+                <p class="h1">Heading 1</p>
+                <p class="h2">Heading 2</p>
+                <p class="h3">Heading 3</p>
+                <p class="h4">Heading 4</p>
+                <p class="h5">Heading 5</p>
+                <p class="h6">Heading 6</p>
+            </div>
+            <div></div>
+            <div class="vstack row-gap-3 mb-4">
+                <p class="h1">Heading 1 <small class="text-body-secondary">With faded secondary text</small></p>
+            </div>
+            <div></div>
+            <div class="vstack row-gap-3 mb-4">
+                <p class="display-1">Display 1</p>
+                <p class="display-2">Display 2</p>
+                <p class="display-3">Display 3</p>
+                <p class="display-4">Display 4</p>
+            </div>
+            <div></div>
+            <div class="vstack row-gap-3">
+                <HashLink id="2">Hash Link 2</HashLink>
+                <HashLink id="3" level={3}>Hash Link 3</HashLink>
+                <HashLink id="4" level={4}>Hash Link 4</HashLink>
+                <HashLink id="5" level={5}>Hash Link 5</HashLink>
+                <HashLink id="6" level={6}>Hash Link 6</HashLink>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <HashLink id="content">Content</HashLink>
+        <hr class="mb-5">
+        <div class="row">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi officia eum qui tempora error perspiciatis, esse consequatur facilis dolorem illo quaerat, cum deserunt vitae id? Laudantium ad labore porro incidunt.</p>
+            <a href="#">Generic Link</a>
+
+        </div>
+    </div>
+    <div class="container text-bg-dark">
+        <div class="row">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi officia eum qui tempora error perspiciatis, esse consequatur facilis dolorem illo quaerat, cum deserunt vitae id? Laudantium ad labore porro incidunt.</p>
+        </div>
+    </div>
+
+</Layout>
+<style>
+    .container {
+        padding: 3rem;
+    }
+</style>
