@@ -1,15 +1,16 @@
 ---
 import { createVars } from '../lib/createVars';
 import { brand } from '../../public/config.json';
-
+import DarkModeToggle from './DarkModeToggle.astro';
 interface Props {
     floating?: boolean;
     center?: boolean;
     auth?: boolean;
     navItems?: Record<string, string>[];
+    shadow?: boolean;
 }
 
-const { floating, center } = Astro.props;
+const { floating, center, shadow = false } = Astro.props;
 let navItems = Astro.props.navItems;
 if (!navItems) {
     navItems = [
@@ -24,47 +25,34 @@ if (!navItems) {
     ]
 }
 
-const shadowClass = 'shadow';
+const shadowClass = shadow ? 'shadow' : '';
 
-const bsColor = !floating ? 'var(--bs-gray-800)' : 'var(--bs-gray-000)';
-const bsHoverColor = !floating ? 'var(--bs-primary-500)' : 'var(--bs-primary-300)';
-
-const navClasses = ():string[] => {
-    const classes = ['navbar navbar-expand-lg'];
-    if (!center && floating) {
-        classes.push('w-75', 'mx-auto');
-    }
-    if (center && floating) {
-        classes.push('w-50','mx-auto');
-    }
-    if (!floating) {
-        classes.push(shadowClass)
-    }
-    return classes;
+const navClasses = ['navbar navbar-expand-lg'];
+if (!center && floating) {
+    navClasses.push('w-75', 'mx-auto');
+}
+if (center && floating) {
+    navClasses.push('w-50','mx-auto');
+}
+if (!floating) {
+    navClasses.push(shadowClass)
 }
 
-const containerClasses = () => {
-    const classes = ['container'];
-    if (floating) {
-        classes.push('text-bg-dark p-3 rounded-3', shadowClass);
-    }
-    if (center) classes.push('vstack');
 
-    return classes;
+const containerClasses =  ['container'];
+if (floating) {
+    containerClasses.push('text-bg-dark p-3 rounded-3', shadowClass);
 }
+if (center) containerClasses.push('vstack');
 
-const cssVars = createVars({
-    brandColor: bsColor,
-    color: bsColor,
-    brandHoverColor: bsHoverColor,
-    hoverColor: bsHoverColor,
-    brandFontSize: '4ch',
-    brandPaddingY: 0,
-}, 'bs-navbar')
-
+/**
+ * @TODO
+ * - Fix darkmode toggle position on centered
+ * 
+ */
 ---
-<nav class:list={navClasses()}>
-    <div class:list={containerClasses()}>
+<nav class:list={navClasses}>
+    <div class:list={containerClasses}>
         <a href="/" class="navbar-brand ps-3 pe-2">
             {brand.logo ? <img src={brand.logo} alt={brand.text} /> : brand.text}
         </a>
@@ -75,10 +63,6 @@ const cssVars = createVars({
                 </li>)}
             </ul>
         </div>
+        <DarkModeToggle />
     </div>
 </nav>
-<style define:vars={cssVars}>
-.navbar-brand {
-    font-weight: 900;
-}
-</style>
