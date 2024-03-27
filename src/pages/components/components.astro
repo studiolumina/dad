@@ -1,0 +1,151 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BentoBox from "../../components/BentoBox.astro";
+import HashLink from "../../components/HashLink.astro";
+import DevPalette from "../../components/DevPalette.astro";
+import BentoBoxTabs from "../../components/BentoBoxTabs.astro";
+import AvatarStack from "../../components/AvatarStack.astro";
+import Badge from "../../components/Badge.astro";
+
+const styleTypes = ['primary','secondary','success','danger','warning','info','light','dark'] as const;
+
+const placeholderAvatars = Array.from({ length: 3 }, (_, i) =>({
+    src: `https://placehold.co/200/?text=${i}` //`https://api.lorem.space/image/face?w=200&h=200`
+}))
+---
+<Layout title="See all the available components in action">
+    
+    <div class="container">
+        <HashLink id="badge">Badge</HashLink>
+        <hr class="mb-5">
+        <div class="row row-gap-3">
+            <p class="h3">Size: Small</p>
+            <div class="col-auto">
+                <Badge>Default</Badge>
+            </div>
+            {styleTypes.map((style) => <div class="col-auto"><Badge style={style}>{style[0].toUpperCase() + style.slice(1)}</Badge></div>)}
+            <p class="h3">Size: Medium</p>
+            <div class="col-auto">
+                <Badge size="md">Default</Badge>
+            </div>
+            {styleTypes.map(style => <div class="col-auto"><Badge style={style} size="md">{style[0].toUpperCase() + style.slice(1)}</Badge></div>)}
+            <p class="h3">Size: Large</p>
+            <div class="col-auto">
+                <Badge size="lg">Default</Badge>
+            </div>
+            {styleTypes.map(style => <div class="col-auto"><Badge style={style} size="lg">{style[0].toUpperCase() + style.slice(1)}</Badge></div>)}
+        </div>
+    </div>
+    <!--div class="container">
+        <HashLink id="usercard">User Card</HashLink>
+        <hr class="mb-5">
+        <div class="row row-gap-3">
+            <div class="col-auto">
+                <UserCard avatar="https://placehold.co/200" username="Jill Mavis"/>
+            </div>
+        </div>
+    </div-->
+    <div class="container">
+        <HashLink id="avatar">Avatar</HashLink>
+        <hr class="mb-5">
+        <div class="row row-gap-3">
+            <p>Horizontal</p>
+            <div class="col">
+                <AvatarStack avatars={placeholderAvatars} />
+            </div>
+            <div class="col">
+                <AvatarStack dense={true} avatars={placeholderAvatars} />
+            </div>
+            <p>Vertical</p>
+            <div class="col">
+                <div class="hstack">
+                    <AvatarStack dir="v" avatars={placeholderAvatars}/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="hstack">
+                    <AvatarStack dir="v" dense={true} avatars={placeholderAvatars}/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2 id="bento">Bento <a href="#bento">#</a></h2>
+        <hr class="mb-5">
+    </div>
+    <div class="container-fluid">
+        <BentoBox />
+        <BentoBox theme="light" contentSide="right">
+            <Fragment slot="leftSide">
+                <h3>This bento is set to put the text content on the right, and in a light theme</h3>
+            </Fragment>
+        </BentoBox>
+        <div data-bs-theme="dark" class="text-bg-dark">
+            <BentoBox theme="light">
+                <Fragment slot="leftSide">
+                    <h3>This is what the light theme would look like on dark mode</h3>
+                </Fragment>
+            </BentoBox>
+            <BentoBox contentSide="right">
+                <Fragment slot="leftSide">
+                    <h3>This is what the dark theme would look like on dark mode</h3>
+                </Fragment>
+            </BentoBox>
+        </div>
+    </div>
+    <div class="container">
+        <HashLink id="bento-tabs">Bento Tabs</HashLink>
+        <hr class="mb-5">
+    </div>
+    <div class="container-fluid">
+        <BentoBoxTabs>
+            <Fragment slot="boxes">
+                <BentoBox />
+                <BentoBox />
+                <BentoBox />
+            </Fragment>
+        </BentoBoxTabs>
+        <BentoBoxTabs floating={true}>
+            <Fragment slot="boxes">
+                <BentoBox>
+                    <Fragment slot="leftSide">
+                        <h2>This is a title that was put here using a Fragment from Astro's JSX-like syntax</h2>
+                    </Fragment>
+                </BentoBox>
+                <BentoBox contentSide="right" />
+                <BentoBox />
+            </Fragment>
+        </BentoBoxTabs>
+    </div>
+    <div class="container">
+        <HashLink id="palette">Palette</HashLink>
+        <hr class="mb-5">
+        <div class="palette-grid">
+            <DevPalette color="gray" invert={4} />
+            <DevPalette color="blue" invert={4} />
+            <DevPalette color="indigo" invert={3} />
+            <DevPalette color="purple" invert={4} />
+            <DevPalette color="pink" invert={4} />
+            <DevPalette color="red" invert={5} />
+            <DevPalette color="orange" invert={5} />
+            <DevPalette color="yellow" invert={5} />
+            <DevPalette color="green" invert={4} />
+            <DevPalette color="teal"  invert={5} />
+            <DevPalette color="cyan" invert={5} />
+        </div>
+    </div>
+</Layout>
+<style>
+    .text-bg-dark:has(.bento) {
+        padding-block: 2rem;
+    }
+
+    body {
+        row-gap: 1.5rem;
+    }
+    .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1rem;
+    }
+</style>
