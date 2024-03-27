@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import type { Positions } from '../types';
+interface Props {
+    image: string | ImageMetadata
+    contentPosition?: Positions;
+}
+
+const image = Astro.props.image;
+const contentPosition = Astro.props.contentPosition ?? 'end';
+---
+<section class="bento-image">
+    <div class="container bento-container">
+        <Image src={image}  alt="" widths={[500, 700, 940, 1120, 1300]} />
+        <div class="container">
+            <div class:list={[
+                    "row h-100 align-items-center", 
+                    'justify-content-md-'+contentPosition,
+                    'justify-content-center',
+                ]}>
+                <div class="col-lg-6 col-md-7 col-10">
+                    <slot></slot>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .bento-image {
+        --bs-heading-color: white;
+        min-height: max(500px, 50vh);
+    }
+    .bento-container {
+        display: grid;
+        background-color: var(--bs-dark);
+        padding: 0;
+
+        @media (min-width: 576px) {
+            border-radius: 1.25rem;
+        }
+        & > * {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .container {
+            z-index: 1;
+        }
+    }
+    img {
+        border-radius: inherit;
+        opacity: 0.5;
+    }
+    @media (min-width: 768px) {
+        img {
+            opacity: 0.85;
+        }
+    }
+</style>
