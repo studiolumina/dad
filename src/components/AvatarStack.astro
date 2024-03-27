@@ -1,0 +1,52 @@
+---
+import Avatar from "./Avatar.astro"
+
+interface AvatarImage {
+    src: string;
+    alt?: string;
+    size?: 'sm'|'md'|'lg'
+}
+
+interface Props {
+    avatars?: AvatarImage[]
+    dir?: 'h' | 'v';
+    rounded?: boolean;
+    dense?: boolean;
+}
+
+const { avatars = [], dir = 'h', rounded = true, dense = false } = Astro.props;
+let denseClass = '';
+let roundClass = 'is-rounded';
+if (dense) {
+    denseClass = 'is-dense';
+}
+if (!rounded) {
+    roundClass = '';
+}
+---
+
+<div class:list={['avatar-stack', 'avatar-'+dir+'stack', denseClass, roundClass]}>
+    {avatars.map((props, i, arr) => <Avatar index={arr.length - i} image={props.src} {...props} />)}
+</div>
+<style>
+    .avatar-stack {
+        display: flex;
+        gap: 1ch;
+    }
+    .avatar-vstack {
+        flex-flow: column;
+        gap: 0.5ch;
+        max-width: auto;
+    }
+    .avatar-stack.is-dense {
+        gap: 0;
+        --dense-border: 2px solid var(--dense-border-color, white);
+        --dense-gap: 0 0 0 -30px;
+    }
+    .avatar-vstack.is-dense {
+        --dense-gap: -30px 0 0;
+    }
+    .avatar-stack.is-rounded {
+        --avatar-border-radius: var(--bs-border-radius-pill);
+    }
+</style>

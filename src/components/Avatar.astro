@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    image?: string;
+    alt?: string;
+    size?: 'sm'|'md'|'lg';
+    index?: number;
+}
+
+let { alt, size, image, index } = Astro.props;
+
+if (!image) {
+    image = 'https://placehold.co/200/?text=A';
+}
+
+const width = {
+    sm: 60,
+    md: 100,
+    lg: 150
+}[size ?? 'md'];
+const height = width;
+---
+<div class="avatar" style={'z-index:'+index}>
+    <Image src={image} width={width} height={height} alt={alt ?? ''} />
+</div>
+<style>
+    .avatar {
+        border: var(--dense-border, 0px solid);
+        position: relative;
+    }
+    .avatar:not(:first-child) {
+        margin: var(--dense-gap);
+    }
+    .avatar,
+    .avatar > img {
+        border-radius: var(--avatar-border-radius, 0);
+    }
+</style>
