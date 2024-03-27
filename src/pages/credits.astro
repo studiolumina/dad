@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets"
+import Layout from "../layouts/Layout.astro"
+import solution1 from '../placeholders/placeholder_solutions-1.jpg';
+import solution2 from '../placeholders/placeholder_solutions-2.jpg';
+import solution3 from '../placeholders/placeholder_solutions-3.jpg';
+import solution4 from '../placeholders/placeholder_solutions-4.jpg'
+---
+<Layout title="Credits">
+    <section class="container">
+        <div class="row column-gap-md-5">
+            <figure class="col-md col-6">
+                <Image src={solution1} alt="" width="200" height="200" />
+                <figcaption>
+                    From unsplash by <a href="https://unsplash.com/@dominostudio">Domino</a>
+                </figcaption>
+            </figure>
+            <figure class="col-md col-6">
+                <Image src={solution2} alt=" " width="200" height="200" />
+                <figcaption>
+                    From unsplash by <a href="https://unsplash.com/@rachitank">Rachit Tank</a>
+                </figcaption>
+            </figure>
+            <figure class="col-md col-6">
+                <Image src={solution3} alt="" width="200" height="200" />
+                <figcaption>
+                    From unsplash by <a href="https://unsplash.com/@ruslanbardash">Ruslan Bardash</a>
+                </figcaption>
+            </figure>
+
+            <figure class="col-md col-6">
+                <Image src={solution4} alt="" width="200" height="200" />
+                <figcaption>
+                    From unsplash by <a href="https://unsplash.com/@ruslanbardash">Ruslan Bardash</a>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+</Layout>
