@@ -1,0 +1,29 @@
+@use 'sass:color';
+@use 'sass:list';
+
+@function getRGB($hex) {
+    @return color.red($hex), color.green($hex), color.blue($hex);
+}
+
+@function getHSL($hex) {
+    @return color.hue($hex), color.saturation($hex), color.lightness($hex);
+}
+
+@mixin generatePalette($list, $key, $prefix: 'bs') {
+    --#{$prefix}-#{$key}: #{list.nth($list, 5)};
+    @for $i from 1 through list.length($list) {
+        $color: list.nth($list, $i);
+        --#{$prefix}-#{$key}-#{$i * 100}: #{$color};
+    }
+    --#{$prefix}-#{$key}-rgb: #{getRGB(list.nth($list, 5))};
+    @for $i from 1 through list.length($list) {
+        $color: list.nth($list, $i);
+        --#{$prefix}-#{$key}-#{$i*100}-rgb: #{getRGB($color)};
+    }
+    
+    --#{$prefix}-#{$key}-hsl: #{getHSL(list.nth($list, 5))};
+    @for $i from 1 through list.length($list) {
+        $color: list.nth($list, $i);
+        --#{$prefix}-#{$key}-#{$i * 100}-hsl: #{getHSL($color)};
+    }
+}

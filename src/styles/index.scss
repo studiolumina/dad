@@ -1,14 +1,193 @@
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
-
-$spacer: 0.75rem;
-$enable-shadow: true;
-$enable-gradients: true;
-$enable-negative-margins: true;
-
-$container-max-widths: (
-    sm: 500px,
-    md: 700px,
-    lg: 940px,
-    xl: 1120px,
-    xxl: 1300px
+@use 'bootstrap/scss/bootstrap.scss' with (
+    $spacer: 0.75rem,
+    $enable-negative-margins: true,
+    $container-max-widths: (
+        sm: 500px,
+        md: 700px,
+        lg: 940px,
+        xl: 1120px,
+        xxl: 1300px
+    ),
+    $pink: #d16595,
+    $primary: #480ffc,
+    $blue: #480ffc,
+    $info: #85c5fb,
+    $dark: #18181b,
+    $gray-100: #e8e8e8,
+    $gray-200: #d1d1d1,
+    $gray-300: #bababb,
+    $gray-400: #a3a3a4,
+    $gray-500: #747476,
+    $gray-600: #2f2f32,
+    $gray-700: #18181b,
+    $gray-800: #131316,
+    $gray-900: #050505,
+    $position-values: (
+        0: 0,
+        10: 10%,
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        90: 90%,
+        100: 100%,
+    ),
+    $grid-gutter-width: 0.75rem,
+    $focus-ring-opacity: 0.5,
+    $font-family-sans-serif: ('Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif),
+    $font-size-base: 1.125rem,
+    $font-weight-base: 600,
+    $input-btn-border-width: 2px,
+    $input-btn-padding-y-sm: 0.1875em,
+    $input-btn-padding-x-sm: 0.375em,
+    $input-btn-padding-y-lg: 0.375em,
+    $input-btn-padding-x-lg: 1em,
+    $btn-border-radius: 50rem,
+    $btn-border-radius-sm: 50rem,
+    $btn-border-radius-lg: 50rem,
 );
+
+@import 'functions.scss';
+@import 'colors.scss';
+
+
+:root,
+[data-bs-theme="light"] {
+    --bs-body-color: var(--bs-gray-900);
+    --bs-link-color-rgb: var(--bs-primary-rgb);
+    --bs-link-hover-color-rgb: var(--bs-primary-600-rgb);
+}
+[data-bs-theme="dark"] {
+    --bs-body-color: var(--bs-gray-100);
+    --bs-body-bg: var(--bs-gray-900)
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    display: flex;
+    min-height: 100dvh;
+    flex-flow: column;
+}
+main {
+    flex-grow: 1;
+}
+
+/* Embrace the collapse */
+main > section,
+.section {
+    margin-block: 140px;
+}
+.section-sm {
+    margin-block: 75px;
+}
+.section-lg {
+    margin-block: 190px;
+}
+.section-p {
+    padding-block: 140px;
+}
+.section-psm {
+    padding-block: 75px
+}
+.section-plg {
+    padding-block: 190px;
+}
+h1 {
+    font-weight: 900;
+}
+h2 {
+    font-weight: 600;
+}
+h1,h2,h3,.h1,.h2,.h3 {
+    text-wrap: pretty;
+}
+:is(h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6) > i {
+    font-weight: 900;
+}
+ul:where([class]) {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.visually-hidden {
+    width: 1px!important;
+    height: 1px!important;
+    padding: 0!important;
+    margin: -1px!important;
+    overflow: hidden!important;
+    clip: rect(0,0,0,0)!important;
+    white-space: nowrap!important;
+    border: 0!important;
+}
+:is(ul, ol) {
+    padding-left: unset;
+    list-style-position: inside;
+    display: grid;
+    grid-gap: 0.5em;
+}
+:is(ul, ol)[role="list"] {
+    list-style-type: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.navbar {
+    --bs-navbar-brand-color: var(--bs-gray-1000);
+    --bs-navbar-brand-hover-color: var(--bs-primary-600);
+    --bs-navbar-color: var(--bs-gray-1000);
+    --bs-navbar-hover-color: var(--bs-primary-600);
+    --bs-navbar-brand-font-size: 3rem;
+    --bs-navbar-brand-padding-y: 0;
+    &:has(.text-bg-dark),
+    [data-bs-theme="dark"] &  {
+        --bs-navbar-brand-color: var(--bs-gray-100);
+        --bs-navbar-brand-hover-color: var(--bs-primary-400);
+        --bs-navbar-color: var(--bs-gray-100);
+        --bs-navbar-hover-color: var(--bs-primary-400)
+    }
+    .navbar-brand {
+        font-weight: 900;
+    }
+}
+
+.nav-link:focus-visible {
+    border-radius: var(--bs-size-sm);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-300-rgb), 0.5);
+}
+
+[data-bs-theme="dark"] {
+    --bs-heading-color: var(--bs-gray-100)
+}
+
+.bento {
+    --bs-body-color: var(--bs-gray-100);
+    --bs-heading-color: white;
+    .bento-row {
+        background-color: var(--bs-gray-800);
+    }
+}
+.bento[data-theme="light"] {
+    --bs-body-color: var(--bs-gray-700);
+    --bs-heading-color: var(--bs-gray-800);
+    .bento-row {
+        background-color: var(--bs-gray-100);
+    }
+}
+
+[data-bs-theme="dark"] .bento {
+    .bento-row {
+        background-color: var(--bs-gray-100);
+    }
+    
+    &[data-theme="dark"] {
+        --bs-body-color: var(--gray-100);
+        --bs-heading-color: white;
+        .bento-row {
+            background-color: var(--bs-gray-900)
+        }
+    }
+}

@@ -1,0 +1,56 @@
+@use 'sass:string';
+@import 'functions';
+@import 'bootstrap/scss/functions';
+@import "bootstrap/scss/variables";
+@import 'bootstrap/scss/maps';
+
+
+$primaryHexes: (#f9ecf2, #eec5d7, #e29fbd, #d679a3, #d16595, #c53f7b, #9e3262, #76264a, #4f1931, #270d19);
+$secondaryHexes: (#f1f9ff, #d6ecfe, #bbdffd, #a0d2fc, #85c5fb, #6bace1, #5386af, #3c607d, #24394b, #0c1319);
+$white: #ffffff;
+$gray-100: #e8e8e8;
+$gray-200: #d1d1d1;
+$gray-300: #bababb;
+$gray-400: #a3a3a4;
+$gray-500: #747476;
+$gray-600: #2f2f32;
+$gray-700: #18181b;
+$gray-800: #131316;
+$gray-900: #050505;
+$black: #000000;
+
+$grays: (
+    "gray-100": $gray-100,
+    "gray-200": $gray-200,
+    "gray-300": $gray-300,
+    "gray-400": $gray-400,
+    "gray-500": $gray-500,
+    "gray-600": $gray-600,
+    "gray-700": $gray-700,
+    "gray-800": $gray-800,
+    "gray-900": $gray-900
+);
+// #d16595
+// #85c5fb
+// #a3a3a4
+
+
+// $my-blue: #85c5fb;
+// $my-pink: #d16595;
+
+$all-colors: map-merge-multiple($grays, $blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans);
+:root {
+    @each $color, $hex in $all-colors {
+        --bs-#{$color}: #{$hex};
+        --bs-#{$color}-rgb: #{getRGB($hex)};
+        --bs-#{$color}-hsl: #{getHSL($hex)};
+    }
+}
+@each $color, $hex in $all-colors {
+    .text-#{$color} {
+        color: var(--bs-#{$color});
+    }
+    .bg-#{$color} {
+        background: var(--bs-#{$color});
+    }
+}
