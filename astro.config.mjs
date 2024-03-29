@@ -16,7 +16,7 @@ export const config = {
     logo: '',
   },
   site: 'https://studiolumina.github.io',
-  base: import.meta.env.DEV ? '' : 'dad'
+  base: import.meta.env.DEV ? '' : '/dad'
 }
 
 // https://astro.build/config
