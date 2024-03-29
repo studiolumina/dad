@@ -1,5 +1,6 @@
 ---
 import { config } from '../../astro.config.mjs';
+import Link from './Link.astro';
 const { brand } = config;
 import DarkModeToggle from './DarkModeToggle.astro';
 interface Props {
@@ -53,13 +54,13 @@ if (center) containerClasses.push('vstack');
 ---
 <nav class:list={navClasses}>
     <div class:list={containerClasses}>
-        <a href="/" class="navbar-brand ps-3 pe-2">
+        <Link href="/" class="navbar-brand ps-3 pe-2">
             {brand.logo ? <img src={brand.logo} alt={brand.text} /> : brand.text}
-        </a>
+        </Link>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 {navItems.map(item => <li class="nav-item">
-                    {item?.href ? <a class="nav-link" href={item.href}>{item?.text}</a> : <span class="nav-link">{item.text}</span>}
+                    {item?.href ? <Link class="nav-link" href={item.href}>{item?.text}</Link> : <span class="nav-link">{item.text}</span>}
                 </li>)}
             </ul>
         </div>
