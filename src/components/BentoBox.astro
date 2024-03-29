@@ -1,7 +1,8 @@
 ---
 import { getId } from '../lib/component';
-import { Image } from 'astro:assets';
-import type { AstroImageProps, ImageProps } from '../types';
+import {Image} from 'astro:assets';
+import type { ImageProps } from '../types';
+import { config } from '../../astro.config.mjs';
 
 interface Props {
     images?: (ImageProps)[];
@@ -16,9 +17,10 @@ export type gridStyles = 'top' | 'default' | 'right' | 'bottom';
 const { gridStyle = 'default', contentSide, theme = 'dark', lazy = true } = Astro.props;
 
 const id = getId('bento');
-let images = Astro.props.images;
+let images = Astro.props.images?.map((img) => (img.src = `${config.base}/${img.src}`.replace(/\/\//g, '/'), img));
 
 if (import.meta.env.DEV && !images) {
+    // @ts-ignore
     images =  Array.from({ length: 3 }, (_, i) => ({
         alt: '',
         height: 200,
@@ -47,10 +49,10 @@ if (import.meta.env.DEV && !images) {
                     <div class={"image-grid image-grid-"+ gridStyle}>
                         {images!.map(({ alt = '', width, height, src, link }) => link ? (<div>
                             <a href={link}>
-                                <img src={src} alt={alt} width={width} height={height} loading={lazy ? 'lazy' : null}/>
+                                <Image src={src} alt={alt} width={width} height={height} loading={lazy ? 'lazy' : null}/>
                             </a>
                         </div>) : (<div>
-                            <img src={src} alt={alt} width={width} height={height} loading={lazy ? 'lazy' : null} />
+                            <Image src={src} alt={alt} width={width} height={height} loading={lazy ? 'lazy' : null} />
                         </div>))}
                     </div>
                 </div>
