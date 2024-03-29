@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import type { Positions } from '../types';
 interface Props {
-    image: string | ImageMetadata
+    image: string;
     contentPosition?: Positions;
 }
 
@@ -11,7 +11,7 @@ const contentPosition = Astro.props.contentPosition ?? 'end';
 ---
 <section class="bento-image">
     <div class="container bento-container">
-        <Image src={image}  alt="" widths={[500, 700, 940, 1120, 1300]} />
+        <img src={image}  alt="" width={1300} />
         <div class="container">
             <div class:list={[
                     "row h-100 align-items-center", 

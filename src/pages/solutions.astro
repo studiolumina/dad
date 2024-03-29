@@ -1,23 +1,31 @@
 ---
-import BentoBox from "../components/BentoBox.astro";
 import Layout from "../layouts/Layout.astro";
+import { config } from '../../astro.config.mjs';
+import HeroBento from '../components/HeroBento.astro';
 import TrustedBy from "../components/TrustedBy.astro";
-import type { ImageProps } from '../types';
-import solutions1 from '../placeholders/placeholder_solutions-1.jpg';
-import solutions2 from '../placeholders/placeholder_solutions-2.jpg'
-import solutions3 from '../placeholders/placeholder_solutions-3.jpg'
-import solutions4 from '../placeholders/placeholder_solutions-4.jpg';
-import brand1 from '../placeholders/placeholder_brand-1.svg';
-import brand2 from '../placeholders/placeholder_brand-2.svg';
-import brand3 from '../placeholders/placeholder_brand-3.png';
-import brand4 from '../placeholders/placeholder_brand-4.svg';
 import Badge from "../components/Badge.astro";
 import BentoImage from "../components/BentoImage.astro";
+
+const solutionImages = ['/placeholders/placeholder_solutions-1.jpg','/placeholders/placeholder_solutions-2.jpg','/placeholders/placeholder_solutions-3.jpg','/placeholders/placeholder_solutions-4.jpg'].map((src,i) => ({
+    src: '/images' + src,
+    width: i === 0 ? 450 : 321,
+    height: i === 0 ? 221 : 321
+}));
+const brandImages = ['/placeholders/placeholder_brand-1.svg',
+'/placeholders/placeholder_brand-2.svg',
+'/placeholders/placeholder_brand-3.png',
+'/placeholders/placeholder_brand-4.svg',].map(src => ({ 
+    src: '/images' + src,
+    width:220,
+    height: 220,
+    alt: ''
+}))
 
 // General layout
 // Large title saying what problem is being solved
 // smaller description that goes into more detail
 
+/*
 // floating bento box with images
 const placeholderImages:ImageProps[] = [
     {
@@ -36,7 +44,6 @@ const placeholderImages:ImageProps[] = [
         height: 321,
     }
 ].map((obj:ImageProps) => (obj.link = '/', obj));
-
 const brandImages:ImageProps[] = [
     {
         src: brand1,
@@ -59,26 +66,22 @@ const brandImages:ImageProps[] = [
         height: 220
     },
 ]
+*/
 const solutionTitle = 'SAAS'
 
 ---
 <Layout title="Our solutions">
-    <section class="hero">
-        <BentoBox theme="light" gridStyle="bottom" images={placeholderImages}>
-            <Fragment slot="leftSide">
-                <h1>It's not about what {solutionTitle} can do.</h1>
-                <p class="h3">It's what <b>dad.</b> can do <i>for you!</i></p>
-            </Fragment>
-        </BentoBox>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-auto hstack column-gap-5 btn-group-lg">
-                    <a href="#" class="btn btn-info">See pricing</a>
-                    <a href="#" class="btn btn-secondary">Contact sales</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <HeroBento
+        title={`It's not about what ${solutionTitle} can do.`} 
+        subtitle={`It's about what <b>${config.brand.text}</b> can do <i>for you!</i>`} 
+        images={solutionImages.slice(0, 3)}
+        gridStyle="bottom"
+        theme="light"
+        primaryBtn="See pricing"
+        primaryLink="#"
+        secondaryBtn="Contact sales"
+        secondaryLink="#"
+    />
     <TrustedBy images={brandImages} />
     <section>
         <div class="container">
@@ -93,20 +96,10 @@ const solutionTitle = 'SAAS'
             </div>
         </div>
     </section>
-    <BentoImage image={solutions4}>
+    <BentoImage image={solutionImages[3].src}>
         <h2 class="display-3 m-0 text-center text-md-end me-5">Be the hero your customers desire!</h2>
         <div class="hstack pt-5 pe-5 justify-content-md-end justify-content-center">
             <a href="#" class="btn btn-warning btn-lg">Sign up now</a>
         </div>
     </BentoImage>
 </Layout>
-<style>
-    .hero {
-        display: grid;
-        place-content: center;
-        padding-bottom: 50px;
-    }
-    .hero :is(h1, p) {
-        text-wrap: balance;
-    }
-</style>

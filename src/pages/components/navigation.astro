@@ -1,7 +1,7 @@
 ---
 import HashLink from "../../components/HashLink.astro";
 import Layout from "../../layouts/Layout.astro";
-import Navigation from "../../components/Navigation.astro";
+const NavComponent = (await import('../../components/Navigation.astro')).default;
 ---
 <Layout title="Navigation">
     <div class="container">
@@ -11,17 +11,17 @@ import Navigation from "../../components/Navigation.astro";
             <hr class="mb-5">
         </div>
     </div>
-    <Navigation />
+    <NavComponent />
     <div class="container">
         <h3 class="h6 mb-0 mt-3">Centered</h3>
     </div>
-    <Navigation center={true} />
+    <NavComponent center={true} />
     <div class="container">
         <h3 class="h6 mb-0 mt-3">Floating</h3>
     </div>
-    <Navigation floating={true} />
+    <NavComponent floating={true} />
     <div class="container">
         <h3 class="h6 mb-0 mt-3">Centered and Floating</h3>
     </div>
-    <Navigation floating={true} center={true} />
+    <NavComponent floating={true} center={true} />
 </Layout>

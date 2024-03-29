@@ -2,9 +2,10 @@ import type { Image } from "astro:assets";
 
 export type Sizes = 'sm' | 'md' | 'lg';
 export type Style = 'primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark';
+export type Themes = 'light' | 'dark';
 
 export interface ImageProps  {
-    src: string|ImageMetadata;
+    src: string;
     alt?: string;
     width: `${number}`|number;
     height: `${number}`|number;

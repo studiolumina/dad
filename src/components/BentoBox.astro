@@ -1,17 +1,17 @@
 ---
 import { getId } from '../lib/component';
 import { Image } from 'astro:assets';
-import type { ImageProps } from '../types';
+import type { AstroImageProps, ImageProps } from '../types';
 
 interface Props {
-    images?: ImageProps[];
+    images?: (ImageProps)[];
     theme?: string;
     contentSide?: 'left' | 'right';
     lazy?: boolean;
     gridStyle?: gridStyles;
 }
 
-type gridStyles = 'top' | 'default' | 'right' | 'bottom';
+export type gridStyles = 'top' | 'default' | 'right' | 'bottom';
 
 const { gridStyle = 'default', contentSide, theme = 'dark', lazy = true } = Astro.props;
 
@@ -47,10 +47,10 @@ if (import.meta.env.DEV && !images) {
                     <div class={"image-grid image-grid-"+ gridStyle}>
                         {images!.map(({ alt = '', width, height, src, link }) => link ? (<div>
                             <a href={link}>
-                                <Image src={src} alt={alt} width={width} height={height}/>
+                                <img src={src} alt={alt} width={width} height={height} loading={lazy ? 'lazy' : null}/>
                             </a>
                         </div>) : (<div>
-                            <Image src={src} alt={alt} width={width} height={height} />
+                            <img src={src} alt={alt} width={width} height={height} loading={lazy ? 'lazy' : null} />
                         </div>))}
                     </div>
                 </div>

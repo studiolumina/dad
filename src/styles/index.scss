@@ -94,14 +94,23 @@ main > section,
 .section-plg {
     padding-block: 190px;
 }
-h1 {
+footer .navbar {
+    padding-block-end: 0;
+}
+h1, h2 {
     font-weight: 900;
 }
-h2 {
-    font-weight: 600;
+.display-1,
+.display-2,
+.display-3,
+.display-4 {
+    font-weight: 900;
 }
 h1,h2,h3,.h1,.h2,.h3 {
     text-wrap: pretty;
+}
+:is(h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6, .navbar-brand) {
+    font-family: 'Ojuju', sans-serif;
 }
 :is(h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6) > i {
     font-weight: 900;
@@ -134,7 +143,14 @@ img {
     max-width: 100%;
     height: auto;
 }
-
+.hero {
+    display: grid;
+    place-content: center;
+    padding-bottom: 50px;
+}
+.hero :is(h1, p) {
+    text-wrap: balance;
+}
 .navbar {
     --bs-navbar-brand-color: var(--bs-gray-1000);
     --bs-navbar-brand-hover-color: var(--bs-primary-600);

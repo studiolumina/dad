@@ -57,11 +57,9 @@ const globalNav = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" />
+		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Ojuju:wght@200..800&display=swap" />
 		<script is:inline>
-			
 			const theme = localStorage.getItem('is-dark') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-			console.log(localStorage.getItem('is-dark'), theme);
 			document.documentElement.dataset.bsTheme = theme;
 			localStorage.setItem('is-dark', theme);
 		</script>

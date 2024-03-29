@@ -1,0 +1,54 @@
+---
+import type { AstroImageProps, ImageProps, Themes } from '../types'
+import BentoBox, { type gridStyles} from './BentoBox.astro';
+interface Props {
+    images: ImageProps[];
+    title: string;
+    subtitle?:string;
+    primaryBtn?: string;
+    primaryLink?: string;
+    secondaryBtn?: string;
+    secondaryLink?: string;
+    theme?: Themes;
+    gridStyle?: gridStyles;
+}
+
+const {
+    images,
+    title,
+    subtitle = '',
+    primaryBtn = '',
+    primaryLink = '',
+    secondaryBtn = '',
+    secondaryLink = '',
+    gridStyle = 'bottom',
+    theme = 'light',
+} = Astro.props;
+---
+<section class="hero">
+    <BentoBox theme={theme} gridStyle={gridStyle} images={images}>
+        <Fragment slot="leftSide">
+            <h1>{title}</h1>
+            {subtitle !== '' && <p class="h3">It's what <b>dad.</b> can do <i>for you!</i></p>}
+        </Fragment>
+    </BentoBox>
+    {(primaryLink || secondaryLink) && <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto hstack column-gap-5 btn-group-lg">
+                    {primaryBtn && primaryLink && <a href={primaryLink} class="btn btn-info">{primaryBtn}</a>}
+                    {secondaryBtn && secondaryLink && <a href={secondaryLink} class="btn btn-secondary">{secondaryBtn}</a>}
+                </div>
+            </div>
+        </div>
+    }
+</section>
+<style>
+    .hero {
+        display: grid;
+        place-content: center;
+        padding-bottom: 50px;
+    }
+    .hero :is(h1, p) {
+        text-wrap: balance;
+    }
+</style>

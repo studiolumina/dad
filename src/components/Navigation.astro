@@ -1,6 +1,6 @@
 ---
-import { createVars } from '../lib/createVars';
-import { brand } from '../../public/config.json';
+import { config } from '../../astro.config.mjs';
+const { brand } = config;
 import DarkModeToggle from './DarkModeToggle.astro';
 interface Props {
     floating?: boolean;

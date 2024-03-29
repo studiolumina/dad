@@ -1,0 +1,33 @@
+---
+interface Props {
+    title: string;
+    subtitle?: string;
+    separator?: boolean | `${boolean}`;
+}
+const { title, subtitle, separator } = Astro.props;
+---
+<section class="hero">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h1 class="text-center display-1">{title}</h1>
+                {separator && <hr />}
+                {subtitle && <p class="text-center"><i>{subtitle}</i></p>}
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .hero:has(hr) {
+        container-type: inline-size;
+    }
+    hr {
+        height: 3px;
+        border: unset;
+        width: 10cqi;
+        background-color: var(--bs-dark);
+        opacity: 1;
+        margin-inline: auto;
+        margin-block: 2ch;
+    }
+</style>
