@@ -4,7 +4,7 @@ import icon from "astro-icon";
 
 import purgecss from "astro-purgecss";
 
-
+console.log(import.meta.env.DEV)
 export const config = {
   integrations: [icon({
     include: {
@@ -16,7 +16,7 @@ export const config = {
     logo: '',
   },
   site: 'https://studiolumina.github.io',
-  base: import.meta.env.DEV ? '' : '/dad'
+  base: import.meta.env.PROD ? 'dad' : ''
 }
 
 // https://astro.build/config

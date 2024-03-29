@@ -1,6 +1,8 @@
 ---
 import { config } from '../../astro.config.mjs';
 
-let href = `${config.base}/${Astro.props.href}`.replace(/\/\//g, '/');
+let { href, ...props } = Astro.props;
+console.log(href);
+href = `/${config.base}/${href}`.replace(/\/\//g, '/');
 ---
-<a {...Astro.props} href={href}><slot></slot></a>
+<a {...props} href={href}><slot></slot></a>
