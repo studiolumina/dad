@@ -4,7 +4,6 @@ import icon from "astro-icon";
 
 import purgecss from "astro-purgecss";
 
-console.log(import.meta.env.DEV)
 export const config = {
   integrations: [icon({
     include: {
