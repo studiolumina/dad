@@ -45,6 +45,57 @@
     $btn-border-radius-sm: 50rem,
     $btn-border-radius-lg: 50rem,
 );
+
+
+/* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1140,18,1.5,5,4,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+:root {
+    --fz--4: clamp(0.2222rem, 0.7812rem + -0.7845vi, 0.6243rem);
+    --fz--3: clamp(0.3333rem, 0.8463rem + -0.72vi, 0.7023rem);
+    --fz--2: clamp(0.5rem, 0.9033rem + -0.5661vi, 0.7901rem);
+    --fz--1: clamp(0.75rem, 0.9431rem + -0.271vi, 0.8889rem);
+    --fz-0: clamp(1rem, 0.9512rem + 0.2439vi, 1.125rem);
+    --fz-1: clamp(1.125rem, 0.9055rem + 1.0976vi, 1.6875rem);
+    --fz-2: clamp(1.2656rem, 0.7717rem + 2.4695vi, 2.5313rem);
+    --fz-3: clamp(1.4238rem, 0.4978rem + 4.6303vi, 3.7969rem);
+    --fz-4: clamp(1.6018rem, 0.0043rem + 7.9873vi, 5.6953rem);
+    --fz-5: clamp(1.802rem, -0.8286rem + 13.153vi, 8.543rem);
+}
+:root {
+    font-size: 1rem;
+}
+
+h1, .h1 {
+    font-size: var(--fz-3);
+}
+h2, .h2 {
+    font-size: var(--fz-2);
+}
+h3, .h3 {
+    font-size: var(--fz-1);
+}
+h4, .h4 {
+    font-size: var(--fz-0);
+}
+h5, .h5 {
+    font-size: var(--fz--1);
+}
+h6, .h6 {
+    font-size: var(--fz--2);
+}
+
+:is(.display-1, .display-2, .display-3) {
+    line-height: 1.05;
+}
+.display-1 {
+    font-size: var(--fz-5);
+}
+.display-2 {
+    font-size: var(--fz-4);
+}
+.display-3 {
+    font-size: var(--fz-3);
+}
 @import 'colors.scss';
 @import 'functions.scss';
 @import 'elements.scss';
