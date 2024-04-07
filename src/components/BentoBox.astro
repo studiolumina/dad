@@ -17,7 +17,7 @@ export type gridStyles = 'top' | 'default' | 'right' | 'bottom';
 const { gridStyle = 'default', contentSide, theme = 'dark', lazy = true } = Astro.props;
 
 const id = getId('bento');
-let images = Astro.props.images?.map((img) => (img.src = `${config.base}/${img.src}`.replace(/\/\//g, '/'), img));
+let images = Astro.props.images;//?.map((img) => (img.src = await import(`${img.src}`.replace(/\/\//g, '/'), img));
 
 if (import.meta.env.DEV && !images) {
     // @ts-ignore

@@ -1,0 +1,32 @@
+---
+import Card from './Card.astro'
+
+interface Props {};
+---
+<section class="features">
+    <div class="container">
+        <div class="row">
+            <p class="suptitle">features</p>
+            <h2 class="title">What you get with dad.</h2>
+            <p class="subtitle">One of the most templates on the market. Star it! Fork it! Call your mom about it!</p>
+            <div class="col-lg-4 col-md-6">
+                <Card border={false} level={4} title="Astro + Bootstrap" body="A match made in git to speed up your development time"/>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <Card border={false} level={4} title="Ready to use components" body="We've pre-made the boxes that you love to move around on the web" href="/components"/>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <Card border={false} level={4} title="Made for Bootstrap" body="We love Bootstrap! That's why we use SCSS!"/>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <Card border={false} level={4} title="Excellent Page Speed" body={`Loads in less time than it takes to say "Hey, has that page finished loading yet?"`}/>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <Card border={false} level={4} title="Search Engine Optimization" body="Nobody likes doing it, so we made sure that your site has no roadblocks"/>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <Card border={false} level={4} title="Got an idea?" body="Find us on GitHub and we will look into adding it!"/>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,85 @@
+
+:root,
+[data-bs-theme="light"] {
+    --bs-body-color: var(--bs-gray-900);
+    --bs-link-color-rgb: var(--bs-primary-rgb);
+    --bs-link-hover-color-rgb: var(--bs-primary-600-rgb);
+}
+[data-bs-theme="dark"] {
+    --bs-heading-color: var(--bs-gray-100)
+    --bs-body-color: var(--bs-gray-100);
+    --bs-body-bg: var(--bs-gray-900)
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    display: flex;
+    min-height: 100dvh;
+    flex-flow: column;
+}
+main {
+    flex-grow: 1;
+}
+
+/* Embrace the collapse */
+main > section,
+.section {
+    margin-block: 140px;
+}
+.section-sm {
+    margin-block: 75px;
+}
+.section-lg {
+    margin-block: 190px;
+}
+.section-p {
+    padding-block: 140px;
+}
+.section-psm {
+    padding-block: 75px
+}
+.section-plg {
+    padding-block: 190px;
+}
+footer .navbar {
+    padding-block-end: 0;
+}
+h1, h2 {
+    font-weight: 900;
+}
+.display-1,
+.display-2,
+.display-3,
+.display-4 {
+    font-weight: 900;
+}
+h1,h2,h3,.h1,.h2,.h3 {
+    text-wrap: pretty;
+}
+:where(h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6, .navbar-brand) {
+    font-family: 'Ojuju', sans-serif;
+}
+:is(h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6) > i {
+    font-weight: 900;
+}
+ul:where([class]) {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+:is(ul, ol) {
+    padding-left: unset;
+    list-style-position: inside;
+    display: grid;
+    grid-gap: 0.5em;
+}
+:is(ul, ol)[role="list"] {
+    list-style-type: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}

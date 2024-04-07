@@ -5,6 +5,8 @@ import Footer from '../components/Footer.astro';
 import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
 import Navigation from '../components/Navigation.astro';
 import * as config from '../../public/config.json';
+import Badge from '../components/Badge.astro';
+import SiteBanner from '../components/SiteBanner.astro';
 
 const base = config?.base ?? '';
 
@@ -65,6 +67,9 @@ const globalNav = [
 		</script>
 	</head>
 	<body>
+		<SiteBanner style="secondary">
+			<Badge style="info" size='md'>Ready</Badge> for Astro 4.5
+		</SiteBanner>
 		<Navigation navItems={globalNav} />
 		<main>
 			<slot />

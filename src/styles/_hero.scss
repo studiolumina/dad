@@ -1,0 +1,9 @@
+
+.hero {
+    display: grid;
+    place-content: center;
+    padding-bottom: 50px;
+}
+.hero :is(h1, p) {
+    text-wrap: balance;
+}

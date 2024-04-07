@@ -1,0 +1,30 @@
+
+.bento {
+    --bs-body-color: var(--bs-gray-100);
+    --bs-heading-color: white;
+    .bento-row {
+        background-color: var(--bs-gray-800);
+    }
+}
+
+.bento[data-theme="light"] {
+    --bs-body-color: var(--bs-gray-700);
+    --bs-heading-color: var(--bs-gray-800);
+    .bento-row {
+        background-color: var(--bs-gray-100);
+    }
+}
+
+[data-bs-theme="dark"] .bento {
+    .bento-row {
+        background-color: var(--bs-gray-100);
+    }
+    
+    &[data-theme="dark"] {
+        --bs-body-color: var(--gray-100);
+        --bs-heading-color: white;
+        .bento-row {
+            background-color: var(--bs-gray-900)
+        }
+    }
+}

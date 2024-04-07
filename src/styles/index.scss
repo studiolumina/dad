@@ -35,7 +35,7 @@
     $focus-ring-opacity: 0.5,
     $font-family-sans-serif: ('Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif),
     $font-size-base: 1.125rem,
-    $font-weight-base: 600,
+    $font-weight-base: 400,
     $input-btn-border-width: 2px,
     $input-btn-padding-y-sm: 0.1875em,
     $input-btn-padding-x-sm: 0.375em,
@@ -45,165 +45,10 @@
     $btn-border-radius-sm: 50rem,
     $btn-border-radius-lg: 50rem,
 );
-
-@import 'functions.scss';
 @import 'colors.scss';
-
-
-:root,
-[data-bs-theme="light"] {
-    --bs-body-color: var(--bs-gray-900);
-    --bs-link-color-rgb: var(--bs-primary-rgb);
-    --bs-link-hover-color-rgb: var(--bs-primary-600-rgb);
-}
-[data-bs-theme="dark"] {
-    --bs-body-color: var(--bs-gray-100);
-    --bs-body-bg: var(--bs-gray-900)
-}
-
-html,
-body {
-    height: 100%;
-}
-body {
-    display: flex;
-    min-height: 100dvh;
-    flex-flow: column;
-}
-main {
-    flex-grow: 1;
-}
-
-/* Embrace the collapse */
-main > section,
-.section {
-    margin-block: 140px;
-}
-.section-sm {
-    margin-block: 75px;
-}
-.section-lg {
-    margin-block: 190px;
-}
-.section-p {
-    padding-block: 140px;
-}
-.section-psm {
-    padding-block: 75px
-}
-.section-plg {
-    padding-block: 190px;
-}
-footer .navbar {
-    padding-block-end: 0;
-}
-h1, h2 {
-    font-weight: 900;
-}
-.display-1,
-.display-2,
-.display-3,
-.display-4 {
-    font-weight: 900;
-}
-h1,h2,h3,.h1,.h2,.h3 {
-    text-wrap: pretty;
-}
-:is(h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6, .navbar-brand) {
-    font-family: 'Ojuju', sans-serif;
-}
-:is(h1,h2,h3,h4,h5,h6, .h1,.h2,.h3,.h4,.h5,.h6) > i {
-    font-weight: 900;
-}
-ul:where([class]) {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-.visually-hidden {
-    width: 1px!important;
-    height: 1px!important;
-    padding: 0!important;
-    margin: -1px!important;
-    overflow: hidden!important;
-    clip: rect(0,0,0,0)!important;
-    white-space: nowrap!important;
-    border: 0!important;
-}
-:is(ul, ol) {
-    padding-left: unset;
-    list-style-position: inside;
-    display: grid;
-    grid-gap: 0.5em;
-}
-:is(ul, ol)[role="list"] {
-    list-style-type: none;
-}
-img {
-    max-width: 100%;
-    height: auto;
-}
-.hero {
-    display: grid;
-    place-content: center;
-    padding-bottom: 50px;
-}
-.hero :is(h1, p) {
-    text-wrap: balance;
-}
-.navbar {
-    --bs-navbar-brand-color: var(--bs-gray-1000);
-    --bs-navbar-brand-hover-color: var(--bs-primary-600);
-    --bs-navbar-color: var(--bs-gray-1000);
-    --bs-navbar-hover-color: var(--bs-primary-600);
-    --bs-navbar-brand-font-size: 3rem;
-    --bs-navbar-brand-padding-y: 0;
-    &:has(.text-bg-dark),
-    [data-bs-theme="dark"] &  {
-        --bs-navbar-brand-color: var(--bs-gray-100);
-        --bs-navbar-brand-hover-color: var(--bs-primary-400);
-        --bs-navbar-color: var(--bs-gray-100);
-        --bs-navbar-hover-color: var(--bs-primary-400)
-    }
-    .navbar-brand {
-        font-weight: 900;
-    }
-}
-
-.nav-link:focus-visible {
-    border-radius: var(--bs-size-sm);
-    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-300-rgb), 0.5);
-}
-
-[data-bs-theme="dark"] {
-    --bs-heading-color: var(--bs-gray-100)
-}
-
-.bento {
-    --bs-body-color: var(--bs-gray-100);
-    --bs-heading-color: white;
-    .bento-row {
-        background-color: var(--bs-gray-800);
-    }
-}
-.bento[data-theme="light"] {
-    --bs-body-color: var(--bs-gray-700);
-    --bs-heading-color: var(--bs-gray-800);
-    .bento-row {
-        background-color: var(--bs-gray-100);
-    }
-}
-
-[data-bs-theme="dark"] .bento {
-    .bento-row {
-        background-color: var(--bs-gray-100);
-    }
-    
-    &[data-theme="dark"] {
-        --bs-body-color: var(--gray-100);
-        --bs-heading-color: white;
-        .bento-row {
-            background-color: var(--bs-gray-900)
-        }
-    }
-}
+@import 'functions.scss';
+@import 'elements.scss';
+@import 'hero.scss';
+@import 'card.scss';
+@import 'nav.scss';
+@import 'bento.scss';

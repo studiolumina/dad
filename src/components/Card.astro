@@ -1,21 +1,31 @@
 ---
+import DynamicHeading from './DynamicHeading.astro';
+
 interface Props {
 	title: string;
 	body: string;
 	href?: string;
+	level?: 2|3|4|`${2|3|4}`;
+	border?: boolean;
+	useSubtitle?: boolean;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, body, level = 3 } = Astro.props;
+
+const classNames = [];
+
+if (!Astro.props.border) {
+	classNames.push('border', 'border-0');
+}
 ---
-<div class="card">
-	<h2>
-		{title}
-		<span>&rarr;</span>
-	</h2>
-	<p>
-		{body}
-	</p>
-	{href && <a href={href} class="stretched-link">
-		<span class="visually-hidden">Go to page at {href}</span>
-	</a>}
+<div class:list={["card", ...classNames]}>
+	<div class="card-body">
+		<DynamicHeading level={level} useParagraph class='card-title'>{title} &rarr;</DynamicHeading>
+		<p class={Astro.props.useSubtitle ? 'card-subtitle' : ''}>
+			{body}
+		</p>
+		{href && <a href={href} class="stretched-link">
+			<span class="visually-hidden">Go to page at {href}</span>
+		</a>}
+	</div>
 </div>

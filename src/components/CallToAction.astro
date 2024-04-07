@@ -1,0 +1,19 @@
+---
+import DynamicHeading from './DynamicHeading.astro';
+interface Props {
+    level?: number;
+}
+
+const { level } = Astro.props;
+---
+<section class="cta">
+    <DynamicHeading useParagraph class="cta-heading" level={level}><slot></slot></DynamicHeading>
+</section>
+<style>
+    .cta {
+        width: 100%;
+        background-color: var(--bs-blue-100);
+        text-align: center;
+        padding-block: 1ch;
+    }
+</style>

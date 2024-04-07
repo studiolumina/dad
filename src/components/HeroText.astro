@@ -12,7 +12,7 @@ const { title, subtitle, separator } = Astro.props;
             <div class="col-lg-10">
                 <h1 class="text-center display-1">{title}</h1>
                 {separator && <hr />}
-                {subtitle && <p class="text-center"><i>{subtitle}</i></p>}
+                {subtitle && <p class="text-center h4 fw-medium"><i>{subtitle}</i></p>}
             </div>
         </div>
     </div>
@@ -29,5 +29,12 @@ const { title, subtitle, separator } = Astro.props;
         opacity: 1;
         margin-inline: auto;
         margin-block: 2ch;
+    }
+    p {
+        font-family: var(--bs-body-font-family);
+    }
+    p > i {
+        font: inherit;
+        font-style: italic;
     }
 </style>

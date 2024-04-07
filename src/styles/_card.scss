@@ -1,0 +1,11 @@
+.card-title {
+    font-family: var(--bs-body-font-family);
+    text-wrap: balance;
+}
+.card-title span {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+.card:has(a:hover) .card-title span {
+    transform: translateX(10px);
+}

@@ -1,0 +1,24 @@
+
+.navbar {
+    --bs-navbar-brand-color: var(--bs-gray-1000);
+    --bs-navbar-brand-hover-color: var(--bs-primary-600);
+    --bs-navbar-color: var(--bs-gray-1000);
+    --bs-navbar-hover-color: var(--bs-primary-600);
+    --bs-navbar-brand-font-size: 3rem;
+    --bs-navbar-brand-padding-y: 0;
+    &:has(.text-bg-dark),
+    [data-bs-theme="dark"] &  {
+        --bs-navbar-brand-color: var(--bs-gray-100);
+        --bs-navbar-brand-hover-color: var(--bs-primary-400);
+        --bs-navbar-color: var(--bs-gray-100);
+        --bs-navbar-hover-color: var(--bs-primary-400)
+    }
+    .navbar-brand {
+        font-weight: 900;
+    }
+}
+
+.nav-link:focus-visible {
+    border-radius: var(--bs-size-sm);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-300-rgb), 0.5);
+}

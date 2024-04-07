@@ -1,0 +1,24 @@
+---
+import type { Style, Themes } from '../types'
+import DynamicHeading from './DynamicHeading.astro';
+
+interface Props {
+    style?: Themes | Style;
+    level?: number | `${number}`;
+}
+
+
+const { style = 'dark', level = 5 } = Astro.props;
+---
+<aside class:list={["site-banner", 'text-bg-'+style]}>
+    <p class:list={['h'+level, 'm-0', 'fw-bolder']}><slot></slot></p>
+</aside>
+<style>
+    .site-banner {
+        --bs-heading-color: currentColor;
+        font-family: var(--bs-body-font-family);
+        padding-block: 0.5ch;
+        text-align: center;
+        word-spacing: 0.5ch;
+    }
+</style>
