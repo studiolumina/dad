@@ -1,14 +1,17 @@
 ---
 import { Fragment } from 'astro/jsx-runtime';
+import { headingSizes } from '../lib/headingSizes';
 interface Props {
     level?: number|`${number}`;
     class?: string;
     useParagraph?: boolean;
 }
-const { level = 2, class: className = '', useParagraph = false } = Astro.props;
+let { level = 2, class: className = '', useParagraph = false } = Astro.props;
+const size = headingSizes(level);
+className += ` text-${size}`
 ---
 {useParagraph ? 
-    <p class:list={[className, `h${level}`]}><slot></slot></p> : 
+    <p class={className}><slot></slot></p> : 
     level === 2 ? <h2 class={className}><slot></slot></h2> :
     level === 3 ? <h3 class={className}><slot></slot></h3> :
     level === 4 ? <h4 class={className}><slot></slot></h4> :
