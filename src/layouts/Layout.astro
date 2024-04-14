@@ -1,8 +1,7 @@
 ---
-import '../styles/index.scss';
-import { createPalette } from '../lib/colors';
+// @unocss-include
 import Footer from '../components/Footer.astro';
-import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
+import {AstroFont} from 'astro-font'
 import Navigation from '../components/Navigation.astro';
 import * as config from '../../public/config.json';
 import Badge from '../components/Badge.astro';
@@ -15,22 +14,6 @@ interface Props {
 }
 
 const { title } = Astro.props;
-
-const primaryHexes = 'f9ecf2,eec5d7,e29fbd,d679a3,d16595,c53f7b,9e3262,76264a,4f1931,270d19';
-const secondaryHexes = 'f1f9ff,d6ecfe,bbdffd,a0d2fc,85c5fb,6bace1,5386af,3c607d,24394b,0c1319';
-const grayHexes = 'ffffff,e8e8e8,d1d1d1,bababb,a3a3a4,747476,2f2f32,18181b,131316,000000';
-
-const colors = {
-	...createPalette(primaryHexes, 'bs-primary'),
-	...createPalette(secondaryHexes, 'bs-secondary'),
-	...createPalette(grayHexes, 'bs-gray')
-}
-
-colors['bs-dark'] = colors['bs-gray-900'];
-colors['bs-dark-hsl'] = colors['bs-gray-900-hsl'];
-colors['bs-dark-hex'] = colors['bs-gray-900-hex'];
-colors['bs-dark-rgb'] = colors['bs-gray-900-rgb'];
-colors['bs-black'] = colors['bs-gray-900'];
 const globalNav = [
 	{
 		href: '/',
@@ -47,11 +30,40 @@ const globalNav = [
 ].map((navItem) => {
 	// navItem.href = (import.meta.env.DEV ? '' : base) + navItem.href;
 	return navItem;
-})
+});
+
+const createSrc = (name:string, weights: string[], includeItalic?: boolean) => {
+	return weights.map(weight => {
+		const numberWeight:Record<string, number> = {
+			Bold: 800,
+			Extrabold: 900,
+			Regular: 600
+		};
+
+		const src = [
+			{
+				style: 'normal',
+				weight: numberWeight[weight],
+				path: `/fonts/${name}-${weight}.woff2`
+			}
+		]
+
+		if (includeItalic) {
+			src.push({
+				style: 'italic',
+				weight: numberWeight[weight],
+				path: `/fonts/${name}-${weight}Italic.woff2`
+			})
+		}
+
+		return src;
+	}).flat()
+}
+
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-[100%]">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -59,19 +71,28 @@ const globalNav = [
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Ojuju:wght@200..800&display=swap" />
+		<AstroFont config={[
+			{
+				name: 'BespokeSerif',
+				src: createSrc('BespokeSerif', ['Bold','ExtraBold','Regular']),
+				preload: false,
+				display: 'swap',
+				selector: 'h',
+				fallback: 'serif'
+			}
+		]} />
 		<script is:inline>
 			const theme = localStorage.getItem('is-dark') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-			document.documentElement.dataset.bsTheme = theme;
+			document.documentElement.classList.toggle('dark', theme === 'true');
 			localStorage.setItem('is-dark', theme);
 		</script>
 	</head>
-	<body>
-		<SiteBanner style="secondary">
-			<Badge style="info" size='md'>Ready</Badge> for Astro 4.5
+	<body class="flex flex-col h-[100%] dark:bg-sky-950 dark:c-coolgray-1">
+		<SiteBanner style="sky" level="4">
+			<Badge style="sky" size='sm'>Ready</Badge> for Astro 4.5
 		</SiteBanner>
 		<Navigation navItems={globalNav} />
-		<main>
+		<main class="flex-[1]">
 			<slot />
 		</main>
 		<Footer />
