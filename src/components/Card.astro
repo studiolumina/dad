@@ -18,14 +18,12 @@ if (!Astro.props.border) {
 	classNames.push('border', 'border-0');
 }
 ---
-<div class:list={["card", ...classNames]}>
-	<div class="card-body">
-		<DynamicHeading level={level} useParagraph class='card-title'>{title} &rarr;</DynamicHeading>
-		<p class={Astro.props.useSubtitle ? 'card-subtitle' : ''}>
-			{body}
-		</p>
-		{href && <a href={href} class="stretched-link">
-			<span class="visually-hidden">Go to page at {href}</span>
-		</a>}
-	</div>
+<div class="border-coolgray-300 border-2 border-rd-2 p-5">
+	<DynamicHeading level={level} useParagraph class='h lh-[1] text-6 md:text-8 mb-3'>{title} {href && <span class="pl-3">&rarr;</span>}</DynamicHeading>
+	<p class={Astro.props.useSubtitle ? 'card-subtitle' : ''}>
+		{body}
+	</p>
+	{href && <a href={href} class="stretched-link">
+		<span class="visually-hidden">Go to page at {href}</span>
+	</a>}
 </div>
