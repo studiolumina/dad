@@ -3,7 +3,12 @@
 `dad.` theme is built for anything and everything
 
 ## TODO
+### Features
+
+- [ ] Darkmode
+
 ### Pages
+
 - [ ] Sign In/Up
     - [ ] WebAuthn
     - [ ] Password Recovery
@@ -21,13 +26,14 @@
 - [ ] Solutions (2 layouts)
 
 ### Components
+
 - [ ] Avatar
 - [ ] AvatarStack
 - [ ] Stars (a series of star icons)
 - [ ] Dropdown
 - [ ] BentoBox
-    - [x] Theme Dark/Light
-    - [x] Various Grid Layouts
+    - [ ] Theme Dark/Light
+    - [ ] Various Grid Layouts
     - [ ] Image Background Hover animation
 - [ ] BentoBoxItems
     - [ ] Should support multiple box grid layouts
@@ -47,9 +53,9 @@
 - [ ] FAQ
     - [ ] Series of accordions
 - [ ] Footer
-- [-] Navigation
-    - [X] Center
-    - [X] Floating
+- [ ] Navigation
+    - [ ] Center
+    - [ ] Floating
     - [ ] Auth
 - [ ] Badges
     - [ ] Standalone as subtitles for sections
